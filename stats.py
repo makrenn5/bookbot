@@ -1,14 +1,26 @@
-def word_count(book):
-	with open(book) as text:
-		txt_string = text.read()
-		words_list = txt_string.split()
-		count = len(words_list)
-	return count
+def get_num_words(text):
+    words = text.split()
+    return len(words)
 
-def count_chars(book):
-	chars_dict = {'a':0,'b':0,'c':0,'d':0,'e':0,'f':0,'g':0,'h':0,'i':0,'j':0,'k':0,'l':0,'m':0,'n':0,'o':0,'p':0,'q':0,'r':0,'s':0,'t':0,'u':0,'v':0,'w':0,'x':0,'y':0,'z':0,' ':0,'.':0,',':0,';':0,':':0,'[':0,']':0,'{':0,'}':0,'&':0,'/':0,'*':0,'-':0,'_':0}
-	with open(book) as text:
-		txt_string = text.read()
-	for char in txt_string:
-		lower_case = char.lower()
 
+def get_chars_dict(text):
+    chars = {}
+    for c in text:
+        lowered = c.lower()
+        if lowered in chars:
+            chars[lowered] += 1
+        else:
+            chars[lowered] = 1
+    return chars
+
+
+def sort_on(d):
+    return d["num"]
+
+
+def chars_dict_to_sorted_list(num_chars_dict):
+    sorted_list = []
+    for ch in num_chars_dict:
+        sorted_list.append({"char": ch, "num": num_chars_dict[ch]})
+    sorted_list.sort(reverse=True, key=sort_on)
+    return sorted_list
